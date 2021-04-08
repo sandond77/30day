@@ -24,6 +24,8 @@
     ];
 
     const currentYear = 2021;
+    //can also be const currentYear = new Date().getFullYear()
+
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
     console.log(people.some( person => (currentYear - person.year) >= 19));
@@ -37,11 +39,17 @@
     // Array.prototype.findIndex()
     // Find the comment with this ID
     let index = comments.findIndex( comment => comment.id === 823423);
-    console.log(index);
+    console.log(index);    
+    
+    //alternative solution by creating new array
+    //this is good because it is more efficient. O(1) runtime vs O(n)
+    const newComments = [...comments.slice(0,index), ...comments.slice(index+1)];
+    console.log(newComments);
     // delete the comment with the ID of 823423
     comments.splice(index, 1);
-    console.log(comments);
 
+    console.log(comments);
+   
   </script>
 </body>
 </html>
