@@ -7,7 +7,38 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+  const canvas = document.querySelector('#draw');
+  const ctx = canvas.getContext('2d'); //the context of the canvas. we want it to be 2 dimensional. can also be 3d;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  ctx.strokeStyle = '#BADA55';
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+
+  let isDrawing = false; //flag variable for drawing; true when mouse button is clicked/held
+  let lastX = 0;
+  let lastY = 0;
+
+  function draw(e){
+    if(!isDrawing) return; //will stop function if mouse isnt being clicked by checking our flag variable;
+    console.log(e);
+    ctx.beginPath();
+    ctx.moveTo(lastX,lastY);
+    ctx.lineTo(e.offsetX,e.offsetY);
+    ctx.stroke(); 
+    [lastX, lastY] = [e.offsetX, e.offsetY]; 
+  }
+
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+  canvas.addEventListener('mouseup', () => isDrawing = false);
+  canvas.addEventListener('mouseout', () => isDrawing = false);
+
 </script>
+
 
 <style>
   html, body {
