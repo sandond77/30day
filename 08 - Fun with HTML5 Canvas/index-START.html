@@ -14,19 +14,38 @@
   ctx.strokeStyle = '#BADA55';
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
+  ctx.lineWidth = 0;
+  // ctx.globalCompositeOperation = 'multiply';
 
   let isDrawing = false; //flag variable for drawing; true when mouse button is clicked/held
   let lastX = 0;
   let lastY = 0;
+  let hue = 0; //refer to https://mothereffinghsl.com/ to learn about the 360 value of hues
+  let direction = true;
 
   function draw(e){
     if(!isDrawing) return; //will stop function if mouse isnt being clicked by checking our flag variable;
-    console.log(e);
+
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
     ctx.beginPath();
     ctx.moveTo(lastX,lastY);
     ctx.lineTo(e.offsetX,e.offsetY);
     ctx.stroke(); 
     [lastX, lastY] = [e.offsetX, e.offsetY]; 
+
+    hue++;
+    if(hue >= 360){ //to reset the hue back to 0 since its cyclic anyways
+      hue = 0;
+    };
+    if(ctx.lineWidth >= 500 || ctx.lineWidth <= 1){
+      direction = !direction;
+    }
+
+    if(direction){
+      ctx.lineWidth++;
+    } else {
+      ctx.lineWidth--;
+    };
   }
 
   canvas.addEventListener('mousemove', draw);
