@@ -97,19 +97,25 @@
 
 <script>
   const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
-  checkboxes.forEach(box => box.addEventListener('click', handleCheck);
+  let checked = false;
+  let lastChecked;
 
+  checkboxes.forEach((box, index) => {
+    checked = box.addEventListener('click', handleCheck);
+  });
+
+  if (checked === true) {
+    console.log('true again')
+  }
   function handleCheck(e){
-    
+    console.log('box has been checked');
+    if(e.shiftKey && this.checked){
+      console.log('shift checked')
+    }
+    lastChecked = this;
   } 
 
   console.log(checkboxes);
-  document.addEventListener('onkeydown', event => {
-    console.log('test')
-    if(event.keycode === 16){
-      console.log('shift pressed')
-    }
-  })
 </script>
 </body>
 </html>
