@@ -18,29 +18,67 @@
     }
 
     // Regular
-
+    console.log('hello');
     // Interpolated
-
+    console.log('hello i am a %s string', 'poop') //dont need due to es6 literals
     // Styled
-
+    console.log('%cI am some great text', 'font-size:50px; background: red; text-shadow: 10px 10px 0 blue'); //%c will allow us to add styles
     // warning!
-
+    console.warn('WARNING WARNING');
     // Error :|
-
+    console.error('FUCK FUCK FUCK ')
     // Info
-
+    console.info('This is the automated info system')
     // Testing
+    console.assert( 1 === 1, 'this is wrong'); //second message will only show for false booleans. can test for something in the first argument
+    console.assert( 1 === 3, 'this is wrong, 1 =/= 3');
+
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('ouch'), 'This does not contain ouch');
 
     // clearing
-
+    console.clear();
     // Viewing DOM Elements
-
+    console.log(p);
+    console.dir(p); //this will show you the available methods
     // Grouping together
+    console.clear();
 
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`); //this will group your console logs by the desired attribute
+        console.log(`This is ${dog.name}`);
+        console.log(`${dog.name} is ${dog.age} years old`);
+        console.log(`${dog.name} is ${dog.age*7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    })
+
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`); //this will print the logs collapsed
+        console.log(`This is ${dog.name}`);
+        console.log(`${dog.name} is ${dog.age} years old`);
+        console.log(`${dog.name} is ${dog.age*7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    })
     // counting
+    console.count('test') //counts the results
+    console.count('test')
+    console.count('test')
+    console.count('test')
+    console.count('test')
 
+    console.count('test2')
     // timing
 
+    console.time('fetching data');
+    fetch('https://api.github.com/users/wesbos')
+      .then( data => data.json())
+      .then( data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+      })
+
+    //table
+    console.table(dogs) //presents data in the form of table
   </script>
 </body>
 </html>
