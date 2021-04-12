@@ -96,6 +96,20 @@
   </div>
 
 <script>
+  const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+  checkboxes.forEach(box => box.addEventListener('click', handleCheck);
+
+  function handleCheck(e){
+    
+  } 
+
+  console.log(checkboxes);
+  document.addEventListener('onkeydown', event => {
+    console.log('test')
+    if(event.keycode === 16){
+      console.log('shift pressed')
+    }
+  })
 </script>
 </body>
 </html>
