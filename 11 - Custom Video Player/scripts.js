@@ -4,6 +4,7 @@
 const video = document.querySelector('.player__video');
 const playButton = document.querySelector('.player__button');
 const volumeSlider = document.querySelector('[name="volume"]');
+const playbackSlider = document.querySelector('[name="playbackRate"]');
 // Play Button
 playButton.addEventListener('click', handleVideo);
 
@@ -15,15 +16,16 @@ function handleVideo(){
 	}
 }
 // Volume Slider
-console.log(volumeSlider);
 volumeSlider.addEventListener('input', updateVolume);
 
 function updateVolume(){
-	console.log(volumeSlider.value);
 	video.volume = volumeSlider.value;
 }
-
 // Playback Rate Slider
+playbackSlider.addEventListener('input', updateVolume);
 
+function updateVolume(){
+	video.volume = volumeSlider.value;
+}
 
 // Skip Button
