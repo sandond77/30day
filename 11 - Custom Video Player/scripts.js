@@ -22,10 +22,10 @@ function updateVolume(){
 	video.volume = volumeSlider.value;
 }
 // Playback Rate Slider
-playbackSlider.addEventListener('input', updateVolume);
+playbackSlider.addEventListener('input', updatePlaybackRate);
 
-function updateVolume(){
-	video.volume = volumeSlider.value;
+function updatePlaybackRate(){
+	video.playbackRate = playbackSlider.value;
 }
 
 // Skip Button
