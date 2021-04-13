@@ -107,7 +107,7 @@
   function handleCheck(e){
     // console.log('box has been checked');
     // let inBetween = false;
-    if(e.shiftKey && this.checked && this !== lastChecked){
+    if(e.shiftKey && this.checked && this !== lastChecked){ //third conditional will prevent us from looping through the entire checkboxes if shift clicking same position
       checkboxes.forEach(checkbox => {
         if(checkbox === this || checkbox === lastChecked){ //this will check our boxes in between our two checked boxes
           inBetween = !inBetween; 
