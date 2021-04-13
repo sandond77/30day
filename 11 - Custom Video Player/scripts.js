@@ -30,15 +30,14 @@ function updatePlaybackRate(){
 }
 
 // Skip Button
-console.log(dataSkip)
-
+// console.log(dataSkip)
+let time = 0;
 dataSkip.forEach((data) =>{
-	let skipValue = data.dataset.skip;
-	data.addEventListener('click', () => {
-		video.currentTime = video.currentTime + skipValue;
-	});
+	time = Number.parseInt(data.dataset.skip);
+	data.addEventListener('click', videoSkip);
 })
 
-function videoBack(skipValue){
-	video.currentTime = video.currentTime + skipValue;
+function videoSkip(){
+	video.currentTime += time;
 }
+
