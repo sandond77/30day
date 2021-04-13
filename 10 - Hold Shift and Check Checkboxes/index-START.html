@@ -97,9 +97,9 @@
 
 <script>
   const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
-  let lastChecked;
+  let lastChecked = false; 
   let inBetween = false;
-
+  
   checkboxes.forEach((box, index) => {
     box.addEventListener('click', handleCheck);
   });
@@ -107,7 +107,9 @@
   function handleCheck(e){
     // console.log('box has been checked');
     // let inBetween = false;
-    if(e.shiftKey && this.checked && this !== lastChecked){ //third conditional will prevent us from looping through the entire checkboxes if shift clicking same position
+    if(e.shiftKey && this.checked && this !== lastChecked && lastChecked !== false){ 
+      //third conditional will prevent us from looping through the entire checkboxes if shift clicking same position
+      //fourth conditional will prevent us from looping through entire list if we shift-click initially
       checkboxes.forEach(checkbox => {
         if(checkbox === this || checkbox === lastChecked){ //this will check our boxes in between our two checked boxes
           inBetween = !inBetween; 
@@ -117,6 +119,8 @@
             checkbox.checked = true;
         }
       })
+    } else {
+
     }
     lastChecked = this;
     // console.log(lastChecked)
