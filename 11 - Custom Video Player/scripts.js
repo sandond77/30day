@@ -5,6 +5,7 @@ const video = document.querySelector('.player__video');
 const playButton = document.querySelector('.player__button');
 const volumeSlider = document.querySelector('[name="volume"]');
 const playbackSlider = document.querySelector('[name="playbackRate"]');
+const dataSkip = document.querySelectorAll('[data-skip]');
 // Play Button
 playButton.addEventListener('click', handleVideo);
 
@@ -29,3 +30,15 @@ function updatePlaybackRate(){
 }
 
 // Skip Button
+console.log(dataSkip)
+
+dataSkip.forEach((data) =>{
+	let skipValue = data.dataset.skip;
+	data.addEventListener('click', () => {
+		video.currentTime = video.currentTime + skipValue;
+	});
+})
+
+function videoBack(skipValue){
+	video.currentTime = video.currentTime + skipValue;
+}
