@@ -9,6 +9,8 @@ const playbackSlider = document.querySelector('[name="playbackRate"]');
 const dataSkip = document.querySelectorAll('[data-skip]');
 const progress = document.querySelector('.progress');
 const progressBar = document.querySelector('.progress__filled');
+const fullScreen = document.querySelector('.full_screen');
+const player = document.querySelector('.player');
 
 // Play/Pause Button
 playButton.addEventListener('click', handleVideo);
@@ -79,3 +81,15 @@ function scrub(e){
 	video.currentTime = scrubTime;
 }
 
+//full screen button
+let full = false;
+const oldWidth = player.style.width;
+const oldHeight = player.style.height;
+fullScreen.addEventListener('click', toggleSize);
+
+function toggleSize(){
+	return full ? 
+		(full = false, player.style.width = oldWidth, player.style.height = oldHeight) 
+		:
+		(full = true, player.style.maxWidth ='100%', player.style.width = '100%', player.style.height = '100%')
+}
