@@ -10,11 +10,12 @@ const dataSkip = document.querySelectorAll('[data-skip]');
 const progress = document.querySelector('.progress');
 const progressBar = document.querySelector('.progress__filled');
 
-// Play Button
+// Play/Pause Button
 playButton.addEventListener('click', handleVideo);
 video.addEventListener('click', handleVideo); //so the video itself has play/pause
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
+
 function handleVideo(){
 	if(video.paused){ //will play video if paused
 		video.play()
@@ -27,23 +28,25 @@ function handleVideo(){
 }
 
 function updateButton(){
-	return (video.paused) ? 
-		toggle.textContent = '►' 
-		: 
-		toggle.textContent = '❚ ❚'
+	return (video.paused) ? toggle.textContent = '►' : toggle.textContent = '❚ ❚'
 }
+
+
 // Volume Slider
 volumeSlider.addEventListener('input', updateVolume);
 
 function updateVolume(){
 	video.volume = volumeSlider.value;
 }
+
+
 // Playback Rate Slider
 playbackSlider.addEventListener('input', updatePlaybackRate);
 
 function updatePlaybackRate(){
 	video.playbackRate = playbackSlider.value;
 }
+
 
 // Skip Button
 // console.log(dataSkip)
@@ -58,16 +61,16 @@ function videoSkip(){
 }
 
 //Progress Bar Code
-let length = 0;
-let percent = 0;
-video.onloadedmetadata = () => { //will extract the video duration once it loads
-	length = video.duration;
-	console.log(length);
-};
+video.addEventListener('timeupdate', handleProgress);
+video.addEventListener('click', scrub);
 
-function percentage(){
-	percent = (video.currentTime/length)*100;
-	console.log(percent)
+function handleProgress(){
+	const percent = (video.currentTime / video.duration) * 100;
+	// console.log(video.currentTime, video.duration, percent)
+	progressBar.style.flexBasis = `${percent}%`;
 }
-// const length = video.duration;
-// console.log(length);
+
+function scrub(e){
+	console.log(e)
+}
+
