@@ -61,8 +61,12 @@ function videoSkip(){
 }
 
 //Progress Bar Code
+let mousedown = false;
 video.addEventListener('timeupdate', handleProgress);
-video.addEventListener('click', scrub);
+progress.addEventListener('click', scrub); 
+progress.addEventListener('mousemove', (e) => mousedown && scrub(e)); //&& will force the listener to check the mousedown flag
+progress.addEventListener('mousedown', () => mousedown = true);
+progress.addEventListener('mouseup', () => mousedown = false);
 
 function handleProgress(){
 	const percent = (video.currentTime / video.duration) * 100;
@@ -71,6 +75,7 @@ function handleProgress(){
 }
 
 function scrub(e){
-	console.log(e)
+	const scrubTime = (e.offsetX/progress.offsetWidth) * video.duration;
+	video.currentTime = scrubTime;
 }
 
