@@ -6,8 +6,12 @@ const playButton = document.querySelector('.player__button');
 const volumeSlider = document.querySelector('[name="volume"]');
 const playbackSlider = document.querySelector('[name="playbackRate"]');
 const dataSkip = document.querySelectorAll('[data-skip]');
+const progress = document.querySelector('.progress');
+const progressBar = document.querySelector('.progress__filled');
+
 // Play Button
 playButton.addEventListener('click', handleVideo);
+video.addEventListener('click',handleVideo);
 
 function handleVideo(){
 	if(video.paused){ //will play video if paused
@@ -15,6 +19,9 @@ function handleVideo(){
 	} else {
 		video.pause(); //will pause video if playing
 	}
+
+	//can also use ternary
+	// return (video.paused) ? video.play() : video.pause();
 }
 // Volume Slider
 volumeSlider.addEventListener('input', updateVolume);
@@ -41,3 +48,17 @@ function videoSkip(){
 	video.currentTime += time;
 }
 
+//Progress Bar Code
+let length = 0;
+let percent = 0;
+video.onloadedmetadata = () => { //will extract the video duration once it loads
+	length = video.duration;
+	console.log(length);
+};
+
+function percentage(){
+	percent = (video.currentTime/length)*100;
+	console.log(percent)
+}
+// const length = video.duration;
+// console.log(length);
