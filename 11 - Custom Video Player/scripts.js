@@ -3,6 +3,7 @@
 
 const video = document.querySelector('.player__video');
 const playButton = document.querySelector('.player__button');
+const toggle = document.querySelector('.toggle');
 const volumeSlider = document.querySelector('[name="volume"]');
 const playbackSlider = document.querySelector('[name="playbackRate"]');
 const dataSkip = document.querySelectorAll('[data-skip]');
@@ -11,8 +12,9 @@ const progressBar = document.querySelector('.progress__filled');
 
 // Play Button
 playButton.addEventListener('click', handleVideo);
-video.addEventListener('click',handleVideo);
-
+video.addEventListener('click', handleVideo); //so the video itself has play/pause
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
 function handleVideo(){
 	if(video.paused){ //will play video if paused
 		video.play()
@@ -22,6 +24,13 @@ function handleVideo(){
 
 	//can also use ternary
 	// return (video.paused) ? video.play() : video.pause();
+}
+
+function updateButton(){
+	return (video.paused) ? 
+		toggle.textContent = '►' 
+		: 
+		toggle.textContent = '❚ ❚'
 }
 // Volume Slider
 volumeSlider.addEventListener('input', updateVolume);
