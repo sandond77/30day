@@ -14,12 +14,15 @@
     console.log(e.key)
     pressed.push(e.key);
 
+    // if(pressed.length > secretCode.length){
+    //   pressed.shift(); //this is unefficient code as press.shift is O(n)
+    // }
+    
     if(pressed.length > secretCode.length){
       console.log(pressed)
-      pressed.shift();
+      pressed = pressed.splice(1,pressed.length) //this is equivalent to shift() method;
       console.log(pressed)
     }
-    
 
     if(pressed.join('') == secretCode){
       console.log(true)
