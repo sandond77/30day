@@ -28,7 +28,50 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items')) || []; //checks local storage for items or creates a new array
+  const checkboxes = document.querySelectorAll('input');
+
+  populateList(items, itemsList); //gets the items from local storage
+  addItems.addEventListener('submit', addItem);
+  itemsList.addEventListener('click', toggleDone);
+
+  function addItem(e){
+    e.preventDefault();
+    // console.log('added item')
+    const text = this.querySelector('[name=item]').value //because the function is firing on the sumbit. Can also use document.querySelector
+    const item = {
+      text, //es 6
+      done: false
+    }
+    // console.log(item)
+    items.push(item);
+    // console.table(items);
+    populateList(items, itemsList);
+    localStorage.setItem('items', JSON.stringify(items));
+    this.reset(); //clears the form after submission
+  }
+
+  function populateList(plates = [], platesList){
+    platesList.innerHTML = plates.map((plate, i) => {
+      return `
+        <li>
+            <input type="checkbox" data-index=${i} id="items${i}" ${plate.done ? 'checked' : ''}/>
+            <label for="items${i}">${plate.text}</label>
+        </li>
+      `;
+    }).join(''); //will make our plates.map into a single string instead of an array of seperate string item
+  }
+
+  function toggleDone(e){
+    if(!e.target.matches('input')) return //event delegation from es6. will skip unless its an input
+    // console.log(e.target)
+    const el = e.target;
+    const index = el.dataset.index;
+    console.log(el, index)
+    items[index].done = !items[index].done; 
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
 
 </script>
 
