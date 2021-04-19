@@ -34,6 +34,7 @@
   const checkboxes = document.querySelectorAll('input');
   const remove = document.querySelector('#remove');
   const check = document.querySelector('#check')
+  let same = false;
 
   populateList(items, itemsList); //gets the items from local storage
   addItems.addEventListener('submit', addItem);
@@ -79,13 +80,28 @@
     populateList(items, itemsList);
   }
 
-  function checkAll(){
-    console.log('check')
+  function checkAll(e){
+    e.preventDefault();
+  
+    if(same===false){ //checks our flag variable to see if they are all the same; on first pass, this will also be false so all boxes will get checked
+      items.forEach(item => { //for each loop when enable turn every items.done = true
+        item.done = true; 
+      })
+      same = true; //will turn our flag variable to true so we know that all have been checked;
+    } else { 
+      items.forEach(item => {
+        item.done = false; //turns each items.done to false
+      })
+      same = false;
+    }
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList) //will update the HTML
   }
   
-  function removeAll(){
-    const hasCheck = document.querySelectorAll('li');
-    hasCheck.forEach((node)=>{ //will iterate through each node and remove the html
+  function removeAll(e){
+    e.preventDefault();
+    const hasItem = document.querySelectorAll('li');
+    hasItem.forEach((node)=>{ //will iterate through each node and remove the html
       node.parentElement.removeChild(node);
     })
     localStorage.removeItem('items');
