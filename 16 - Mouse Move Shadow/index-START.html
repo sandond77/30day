@@ -49,9 +49,16 @@
       y = y + e.target.offsetTop;
     }
 
-    const xWalk = Math.round((x / width * walk) - (walk / 2)); //scaling it to walk = 100. centered at zero, we offset the range to -50 to +50;
+    const xWalk = Math.round((x / width * walk) - (walk / 2)); //scaling it to walk = 100px. centered at zero, we offset the range to -50 to +50;
     const yWalk = Math.round((y / width * walk) - (walk / 2)); //-50, 50 is the top left. 0,0 is the center
-    console.log(xWalk,yWalk)
+    // console.log(xWalk,yWalk)
+
+    text.style.textShadow = `
+      ${xWalk}px ${yWalk}px 0 rgba(255,0,255,0.7),
+      ${xWalk * -1}px ${yWalk}px 0 rgba(0,255,255,0.7), /* sends the shadow in the opposite direction cause of the -1 */
+      ${yWalk}px ${xWalk*-1}px 0 rgba(0,255,0,0.7),
+      ${yWalk * -1}px ${xWalk}px 0 rgba(0,0,255,0.7)
+    `
   }
 </script>
 
