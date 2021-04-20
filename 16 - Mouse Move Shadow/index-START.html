@@ -45,7 +45,7 @@
     let { offsetX: x, offsetY: y } = e;
 
     if(this !== e.target){ //checks what the event listener is targeting, since its listening on multiple items such as <h1>
-      x = x + e.target.offsetLeft;
+      x = x + e.target.offsetLeft; 
       y = y + e.target.offsetTop;
     }
 
